@@ -1,96 +1,144 @@
 function getComputerChoice(max) {
     return Math.floor(Math.random() * max);
 }
+let humanScore = 0;
+let computerScore = 0;
+let roundCounter = 0;
 
-function getHumanChoice(number) {
-    humanChoice = prompt('Enter "Rock" "Paper" or "Scissors"');
-    humanChoice = humanChoice.toLowerCase();
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+
+const score = document.querySelector(".score");
+const roundResult = document.querySelector(".roundResult");
+
+
+rock.addEventListener("click", roundStartRock);
+paper.addEventListener("click", roundStartPaper);
+scissors.addEventListener("click", roundStartScissors);
+
+
+function roundStartRock() {
+    let humanChoice = "rock";
+    let computerChoice = getComputerChoice(3);
+
+    if (computerChoice === 0 && humanChoice === "rock") {
+       roundResult.textContent = "Computer chose rock. Tie!";
+    }
+    
+    
+    else if (computerChoice === 1 && humanChoice === "rock") {
+        roundResult.textContent = "Computer chose paper. You lose!";
+        computerScore = computerScore + 1
+    }
+    
+    
+    else if (computerChoice === 2 && humanChoice === "rock") {
+        roundResult.textContent = "Computer chose scissors. You win!";
+        humanScore = humanScore + 1
+    }
+    score.textContent = "Your score: " + humanScore + " Computer score: " + computerScore;
+    roundCounter++
+
+    if (roundCounter === 5) {
+        if(humanScore === computerScore) {
+            score.textContent = "End of 5 rounds. Game is a tie!"
+    
+        }
+        else if(humanScore > computerScore) {
+            score.textContent = "End of 5 rounds. You won!"
+        }
+        else {
+            score.textContent = "End of 5 rounds. You lost!"
+        }
+    humanScore = 0
+    computerScore = 0
+    roundCounter = 0
+    }
+    
+    
+}
+function roundStartPaper() {
+
+    let humanChoice = "paper"
+    let computerChoice = getComputerChoice(3);
+
+    if (computerChoice === 0 && humanChoice === "paper") {
+        roundResult.textContent = "Computer chose rock. You win!";
+        humanScore = humanScore + 1;
+    }
+
+    else if (computerChoice === 1 && humanChoice === "paper") {
+        roundResult.textContent = "Computer chose paper. Tie!";
+    }
+
+    else if (computerChoice === 2 && humanChoice === "paper") {
+        roundResult.textContent = "Computer chose scissors. You lose!";
+        computerScore = computerScore + 1
+    }
+    score.textContent = "Your score: " + humanScore + " Computer score: " + computerScore;
+    roundCounter++
+
+    if (roundCounter === 5) {
+        if(humanScore === computerScore) {
+            score.textContent = "End of 5 rounds. Game is a tie!"
+    
+        }
+        else if(humanScore > computerScore) {
+            score.textContent = "End of 5 rounds. You won!"
+        }
+        else {
+            score.textContent = "End of 5 rounds. You lost!"
+        }
+        humanScore = 0
+        computerScore = 0
+        roundCounter = 0
+    
+    }
+    
+    
 }
 
-console.log("Rock, Paper, Scissors 5 rounds");
+function roundStartScissors() {
 
-let gameOver = false
-while(gameOver != true) {
-    let computerScore = 0;
-    let humanScore = 0;
-for(let i = 0; i < 5; i++){
-getHumanChoice()
+    let humanChoice = "scissors";
+    let computerChoice = getComputerChoice(3);
 
-let computerChoice = getComputerChoice(3);
+    if (computerChoice === 0 && humanChoice === "scissors") {
+        roundResult.textContent = "Computer chose rock. You lose!";
+        computerScore = computerScore + 1
+    }
 
+    else if (computerChoice === 1 && humanChoice === "scissors") {
+        roundResult.textContent = "Computer chose paper. You win!";
+        humanScore = humanScore + 1;
+    }
 
-if (computerChoice === 0 && humanChoice === "rock") {
-    console.log("Computer chose rock. Tie!");
-}
+    else if (computerChoice === 2 && humanChoice === "scissors") {
+        roundResult.textContent = "Computer chose scissors. Tie!";
+    }
+    score.textContent = "Your score: " + humanScore + " Computer score: " + computerScore;
+    roundCounter++
+    if (roundCounter === 5) {
+    if(humanScore === computerScore) {
+        score.textContent = "End of 5 rounds. Game is a tie!"
 
-else if (computerChoice === 0 && humanChoice === "paper") {
-    console.log("Computer Chose rock. You win!");
-    humanScore = humanScore + 1;
-}
-
-else if (computerChoice === 0 && humanChoice === "scissors") {
-    console.log("Computer Chose rock. You lose!");
-    computerScore = computerScore + 1
-}
-
-
-
-else if (computerChoice === 1 && humanChoice === "rock") {
-    console.log("Computer Chose paper. You lose!");
-    computerScore = computerScore + 1
-}
-
-else if (computerChoice === 1 && humanChoice === "paper") {
-    console.log("Computer Chose paper. Tie!");
-}
-
-else if (computerChoice === 1 && humanChoice === "scissors") {
-    console.log("Computer Chose paper. You win!");
-    humanScore = humanScore + 1;
-}
-
-
-
-else if (computerChoice === 2 && humanChoice === "rock") {
-    console.log("Computer Chose scissors. You win!");
-    humanScore = humanScore + 1
-}
-
-else if (computerChoice === 2 && humanChoice === "paper") {
-    console.log("Computer Chose scissors. You lose!");
-    computerScore = computerScore + 1
-}
-
-else if (computerChoice === 2 && humanChoice === "scissors") {
-    console.log("Computer Chose scissors. Tie!");
+    }
+    else if(humanScore > computerScore) {
+        score.textContent = "End of 5 rounds. You won!"
+    }
+    else {
+        score.textContent = "End of 5 rounds. You lost!"
+    }
+    humanScore = 0
+    computerScore = 0
+    roundCounter = 0
 }
 }
-if (computerScore < humanScore) {
-    console.log("Computer score: " + computerScore);
-    console.log("Your score: " + humanScore);
-    console.log("You win!");
-}
-
-else if (computerScore > humanScore) {
-    console.log("Computer score: " + computerScore);
-    console.log("Your score: " + humanScore);
-    console.log("You lose!");
-}
-
-else {
-    console.log("Computer score: " + computerScore);
-    console.log("Your score: " + humanScore);
-    console.log("Tie!");
-}
 
 
-keepPlaying = prompt('Keep playing? "Yes" or "No"?');
-keepPlaying = keepPlaying.toLowerCase();
-
-if (keepPlaying === "no") {
-    gameOver = true;
-}
 
 
-}
-console.log("Thanks for playing!")
+
+
+
